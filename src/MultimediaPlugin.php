@@ -9,9 +9,11 @@ use Filament\Panel;
 
 final class MultimediaPlugin implements Plugin
 {
+    public const string ID = 'vendra-multimedia';
+
     public function getId(): string
     {
-        return 'vendra-multimedia';
+        return self::ID;
     }
 
     public static function make(): static
