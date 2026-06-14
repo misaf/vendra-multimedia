@@ -9,8 +9,6 @@ use Misaf\VendraTenant\Traits\BelongsToTenant;
 use Spatie\MediaLibrary\MediaCollections\Models\Media as SpatieMediaLibrary;
 
 /**
- * Misaf\VendraMultimedia\Models\Multimedia.
- *
  * @property int $tenant_id
  */
 #[Hidden(['tenant_id'])]
