@@ -12,7 +12,7 @@ use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Number;
-use Misaf\VendraActivityLog\Models\ActivityLog;
+use Misaf\VendraMultimedia\Models\Multimedia;
 
 final class LatestMultimediaTableWidget extends BaseWidget
 {
@@ -35,35 +35,35 @@ final class LatestMultimediaTableWidget extends BaseWidget
 
     public static function canView(): bool
     {
-        return true;
+        return false;
     }
 
     public function table(Table $table): Table
     {
         return $table
-            ->heading(__('vendra-multimedia::widgets.latest_activity_log_table'))
-            ->query(fn(): Builder => ActivityLog::query())
+            ->heading(__('vendra-multimedia::widgets.latest_multimedia_table'))
+            ->query(fn(): Builder => Multimedia::query())
             ->columns([
-                BadgeableColumn::make('subject_type')
+                BadgeableColumn::make('model_type')
                     ->alignStart()
-                    ->label(__('vendra-multimedia::tables.subject_type'))
+                    ->label(__('vendra-multimedia::tables.model_type'))
                     ->suffixBadges([
                         Badge::make('count')
-                            ->label(fn(ActivityLog $record): string => Number::format((int) $record->subject_id) ?: '0')
+                            ->label(fn(Multimedia $record): string => Number::format((int) $record->model_id) ?: '0')
                             ->size(Size::Small),
                     ]),
 
-                BadgeableColumn::make('causer_type')
+                BadgeableColumn::make('collection_name')
                     ->alignStart()
-                    ->label(__('vendra-multimedia::tables.causer_type'))
+                    ->label(__('vendra-multimedia::tables.collection_name'))
                     ->suffixBadges([
                         Badge::make('count')
-                            ->label(fn(ActivityLog $record): string => Number::format((int) $record->causer_id) ?: '0')
+                            ->label(fn(Multimedia $record): string => Number::fileSize($record->size))
                             ->size(Size::Small),
                     ]),
             ])
             ->recordActions([
-                ViewAction::make()
+                ViewAction::make(),
             ])
             ->defaultSort(column: 'id', direction: 'desc')
             ->paginationPageOptions([5])

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Misaf\VendraActivityLog\Tests;
+namespace Misaf\VendraMultimedia\Tests;
 
 use Illuminate\Support\Facades\Http;
-use Misaf\VendraActivityLog\ActivityLogServiceProvider;
+use Misaf\VendraMultimedia\Providers\MultimediaServiceProvider;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 use Override;
 
@@ -22,7 +22,7 @@ abstract class TestCase extends OrchestraTestCase
     protected function getPackageProviders($app): array
     {
         return [
-            ActivityLogServiceProvider::class,
+            MultimediaServiceProvider::class,
         ];
     }
 }

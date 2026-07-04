@@ -17,6 +17,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\QueryBuilder;
 use Filament\Tables\Filters\QueryBuilder\Constraints\DateConstraint;
+use Filament\Tables\Filters\QueryBuilder\Constraints\NumberConstraint;
 use Filament\Tables\Filters\QueryBuilder\Constraints\TextConstraint;
 use Filament\Tables\Table;
 use Illuminate\Support\Number;
@@ -56,9 +57,24 @@ final class MultimediaTable
                 ->searchable()
                 ->sortable(),
 
-            TextColumn::make('batch_uuid')
+            TextColumn::make('file_name')
                 ->alignStart()
-                ->label(__('vendra-multimedia::tables.batch_uuid')),
+                ->label(__('vendra-multimedia::tables.file_name'))
+                ->searchable()
+                ->toggleable(),
+
+            TextColumn::make('mime_type')
+                ->alignStart()
+                ->label(__('vendra-multimedia::tables.mime_type'))
+                ->searchable()
+                ->toggleable(),
+
+            TextColumn::make('size')
+                ->alignEnd()
+                ->formatStateUsing(fn(int $state): string => Number::fileSize($state))
+                ->label(__('vendra-multimedia::tables.size'))
+                ->sortable()
+                ->toggleable(),
 
             TextColumn::make('created_at')
                 ->alignCenter()
@@ -93,20 +109,32 @@ final class MultimediaTable
                 [
                     QueryBuilder::make()
                         ->constraints([
-                            TextConstraint::make('event')
-                                ->label(__('vendra-multimedia::attributes.event')),
+                            TextConstraint::make('model_type')
+                                ->label(__('vendra-multimedia::attributes.model_type')),
 
-                            TextConstraint::make('log_name')
-                                ->label(__('vendra-multimedia::attributes.log_name')),
+                            NumberConstraint::make('model_id')
+                                ->label(__('vendra-multimedia::attributes.model_id')),
 
-                            TextConstraint::make('subject_type')
-                                ->label(__('vendra-multimedia::attributes.subject_type')),
+                            TextConstraint::make('uuid')
+                                ->label(__('vendra-multimedia::attributes.uuid')),
 
-                            TextConstraint::make('causer_type')
-                                ->label(__('vendra-multimedia::attributes.causer_type')),
+                            TextConstraint::make('collection_name')
+                                ->label(__('vendra-multimedia::attributes.collection_name')),
 
-                            TextConstraint::make('batch_uuid')
-                                ->label(__('vendra-multimedia::attributes.batch_uuid')),
+                            TextConstraint::make('name')
+                                ->label(__('vendra-multimedia::attributes.name')),
+
+                            TextConstraint::make('file_name')
+                                ->label(__('vendra-multimedia::attributes.file_name')),
+
+                            TextConstraint::make('mime_type')
+                                ->label(__('vendra-multimedia::attributes.mime_type')),
+
+                            TextConstraint::make('disk')
+                                ->label(__('vendra-multimedia::attributes.disk')),
+
+                            NumberConstraint::make('size')
+                                ->label(__('vendra-multimedia::attributes.size')),
 
                             DateConstraint::make('created_at')
                                 ->label(__('vendra-multimedia::attributes.created_at')),

@@ -13,6 +13,6 @@ declare(strict_types=1);
 |
 */
 
-uses(Misaf\VendraActivityLog\Tests\TestCase::class)->in('Feature');
+pest()->extend(Misaf\VendraMultimedia\Tests\TestCase::class)->in('Feature');
 
-uses(Misaf\VendraActivityLog\Tests\TestCase::class)->in('Unit');
+pest()->extend(Misaf\VendraMultimedia\Tests\TestCase::class)->in('Unit');
