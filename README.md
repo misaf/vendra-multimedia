@@ -1,59 +1,71 @@
-# Vendra Activity Log
+# Vendra Multimedia
 
-Tenant-aware activity logging for Vendra applications.
+Tenant-aware media management for Vendra applications.
 
 ## Features
 
-- Tenant-scoped activity logs
-- Filament resource and widget on the `admin` panel
+- Tenant-scoped Spatie Media Library model
+- UUID-based media storage paths
+- Default WebP media conversions helper
+- Filament resource and optional widget on the `admin` panel
 - Translation and migration publishing support
 
 ## Requirements
 
-- PHP 8.2+
-- Laravel 12
+- PHP 8.3+
+- Laravel 12 or 13
 - Filament 5
 - Livewire 4
 - Pest 4
-- Tailwind CSS 4
 - `misaf/vendra-tenant`
 - `misaf/vendra-user`
-- `spatie/laravel-activitylog`
+- `spatie/laravel-medialibrary`
 
 ## Installation
 
 ```bash
-composer require misaf/vendra-activity-log
-php artisan vendor:publish --tag=activitylog-migrations
-php artisan vendor:publish --tag=vendra-activity-log-migrations
+composer require misaf/vendra-multimedia
+php artisan vendor:publish --tag=medialibrary-migrations
+php artisan vendor:publish --tag=vendra-multimedia-migrations
 php artisan migrate
 ```
 
-Set the activity model in `config/activitylog.php`:
+Set the media model and path generator in `config/media-library.php`:
 
 ```php
-'activity_model' => \Misaf\VendraActivityLog\Models\ActivityLog::class,
+'media_model' => \Misaf\VendraMultimedia\Models\Multimedia::class,
+'path_generator' => \Misaf\VendraMultimedia\Support\DefaultPathGenerator::class,
 ```
 
 Optional translations publish:
 
 ```bash
-php artisan vendor:publish --tag=vendra-activity-log-translations
+php artisan vendor:publish --tag=vendra-multimedia-translations
 ```
 
 ## Usage
 
-Use Spatie activity logging as usual:
+Use Spatie Media Library as usual:
 
 ```php
-activity()
-    ->causedBy(auth()->user())
-    ->performedOn($model)
-    ->withProperties(['key' => 'value'])
-    ->log('Did something');
+$model
+    ->addMedia($pathToFile)
+    ->toMediaCollection('default');
 ```
 
-In Filament, logs are available on the `admin` panel.
+Models can reuse the default conversions:
+
+```php
+use Misaf\VendraMultimedia\Concerns\HasDefaultMediaConversions;
+
+class Product extends Model implements HasMedia
+{
+    use HasDefaultMediaConversions;
+    use InteractsWithMedia;
+}
+```
+
+In Filament, media records are available on the `admin` panel.
 
 ## Testing
 
