@@ -4,9 +4,13 @@ declare(strict_types=1);
 
 namespace Misaf\VendraMultimedia\Concerns;
 
+use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-trait HasDefaultMediaConversions
+/**
+ * @phpstan-require-implements HasMedia
+ */
+trait HasDefaultMediaConversions /** @phpstan-ignore trait.unused */
 {
     public function registerMediaConversions(?Media $media = null): void
     {
