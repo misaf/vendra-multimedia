@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Misaf\VendraMultimedia\Support;
 
+use Illuminate\Support\Facades\Config;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\MediaLibrary\Support\PathGenerator\PathGenerator;
 
@@ -26,7 +27,7 @@ final class DefaultPathGenerator implements PathGenerator
 
     private function getBasePath(Media $media): string
     {
-        $prefix = config('media-library.prefix', '');
+        $prefix = Config::string('media-library.prefix', '');
 
         if ('' !== $prefix) {
             return $prefix . '/' . $media->uuid;
