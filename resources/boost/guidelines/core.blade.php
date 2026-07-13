@@ -4,7 +4,7 @@ The `misaf/vendra-multimedia` package owns multimedia and media library manageme
 
 ### Standards
 
-- Keep multimedia domain code inside `app-modules/vendra-multimedia` using the `Misaf\VendraMultimedia` namespace.
+- Keep multimedia domain code inside `packages/vendra-multimedia` using the `Misaf\VendraMultimedia` namespace.
 - Use this package for models, migrations, factories, seeders, policies, permission enums, observers, Filament resources, translations, config, and package bootstrapping.
 - Keep JSON:API serialization and API routes in `misaf/vendra-multimedia-api`.
 - Follow existing model conventions where they apply: tenant ownership, translated `name` / `description` / `slug`, soft deletes, sortable `position`, media collections, factories, and typed relationships.
