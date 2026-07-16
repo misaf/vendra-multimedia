@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Misaf\VendraMultimedia\Filament\Resources\Pages;
+namespace Misaf\VendraMultimedia\Filament\Clusters\Resources\Pages;
 
 use Filament\Resources\Pages\ViewRecord;
-use Misaf\VendraMultimedia\Filament\Resources\MultimediaResource;
+use Misaf\VendraMultimedia\Filament\Clusters\Resources\MultimediaResource;
 
 final class ViewMultimedia extends ViewRecord
 {

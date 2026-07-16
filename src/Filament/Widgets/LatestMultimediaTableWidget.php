@@ -16,12 +16,9 @@ use Misaf\VendraMultimedia\Models\Multimedia;
 
 final class LatestMultimediaTableWidget extends BaseWidget
 {
-    protected static ?int $sort = 9;
+    protected static ?int $sort = 6;
 
-    protected int|string|array $columnSpan = [
-        'sm' => 1,
-        'lg' => 2,
-    ];
+    protected int|string|array $columnSpan = 'full';
 
     protected function getColumns(): int
     {
@@ -66,7 +63,6 @@ final class LatestMultimediaTableWidget extends BaseWidget
                 ViewAction::make(),
             ])
             ->defaultSort(column: 'id', direction: 'desc')
-            ->paginationPageOptions([5])
-            ->poll('10s');
+            ->paginationPageOptions([5]);
     }
 }
